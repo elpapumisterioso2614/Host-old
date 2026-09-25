@@ -1,0 +1,12 @@
+const datos={"Junín":{"Huancayo":{"Huancayo":["Colegio Salesiano Santa Rosa"]}}};
+const region=document.getElementById("region"),provincia=document.getElementById("provincia"),distrito=document.getElementById("distrito"),lugar=document.getElementById("lugar"),guardar=document.getElementById("guardar"),mensaje=document.getElementById("mensaje"),imagen=document.getElementById("imagenMapa");
+for(const r in datos){let o=document.createElement("option");o.value=o.textContent=r;region.appendChild(o)}
+region.onchange=()=>{provincia.innerHTML='<option value="">Seleccione...</option>';distrito.innerHTML='<option value="">Seleccione...</option>';lugar.innerHTML='<option value="">Seleccione...</option>';provincia.disabled=false;distrito.disabled=lugar.disabled=guardar.disabled=true;for(const p in datos[region.value]){let o=document.createElement("option");o.value=o.textContent=p;provincia.appendChild(o)}};
+provincia.onchange=()=>{distrito.innerHTML='<option value="">Seleccione...</option>';lugar.innerHTML='<option value="">Seleccione...</option>';distrito.disabled=false;lugar.disabled=guardar.disabled=true;for(const d in datos[region.value][provincia.value]){let o=document.createElement("option");o.value=o.textContent=d;distrito.appendChild(o)}};
+distrito.onchange=()=>{lugar.innerHTML='<option value="">Seleccione...</option>';lugar.disabled=false;guardar.disabled=true;datos[region.value][provincia.value][distrito.value].forEach(n=>{let o=document.createElement("option");o.value=o.textContent=n;lugar.appendChild(o)})};
+lugar.onchange=()=>{guardar.disabled=!lugar.value;mensaje.textContent="Ubicación lista para guardar.";if(lugar.value==="Colegio Salesiano Santa Rosa")imagen.src="maps/salesiano-mapa.png";else imagen.src="assets/no-map.svg"};
+guardar.onclick=()=>{localStorage.setItem("hostold-lugar",lugar.value);mensaje.textContent="✔ Ubicación guardada correctamente."};
+const visor=document.getElementById("visorMapa"),grande=document.getElementById("mapaGrande");
+document.getElementById("verMapa").onclick=()=>{if(!lugar.value){mensaje.textContent="Primero selecciona un lugar.";return}grande.src=imagen.src;visor.classList.add("activo")};
+document.getElementById("cerrarMapa").onclick=()=>visor.classList.remove("activo");
+document.getElementById("descargarMapa").onclick=()=>{if(!lugar.value){mensaje.textContent="Primero selecciona un lugar.";return}let a=document.createElement("a");a.href=imagen.src;a.download="Hostold-Colegio-Salesiano-Santa-Rosa.png";a.click()};

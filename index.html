@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOSTOLD | Mapas de Accesibilidad</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>HOSTOLD</h1><p>Mapas de Accesibilidad ♿</p></header>
+<main>
+<aside class="panel">
+<h2>Buscar ubicación</h2>
+<label>Región</label><select id="region"><option value="">Seleccione...</option></select>
+<label>Provincia</label><select id="provincia" disabled><option value="">Seleccione...</option></select>
+<label>Distrito</label><select id="distrito" disabled><option value="">Seleccione...</option></select>
+<label>Lugar</label><select id="lugar" disabled><option value="">Seleccione...</option></select>
+<button id="guardar" disabled>Guardar ubicación</button>
+<p id="mensaje">Seleccione una ubicación.</p>
+</aside>
+<section>
+<h2>Mapas disponibles</h2>
+<div class="card"><img id="imagenMapa" src="assets/no-map.svg" alt="Mapa">
+<div><button id="verMapa">🔎 Ver mapa completo</button>
+<button id="descargarMapa">📥 Descargar</button></div></div>
+<div class="legend"><h3>Leyenda</h3><p>♿ Rampa</p><p>🚻 Baño accesible</p><p>🛗 Ascensor</p><p>🅿 Estacionamiento reservado</p><p>🚪 Entrada accesible</p><p>⚠ Escaleras</p></div>
+</section>
+</main>
+<div id="visorMapa"><button id="cerrarMapa">✕</button><img id="mapaGrande" src=""></div>
+<footer>HOSTOLD © 2026</footer>
+<script src="script.js"></script>
+</body>
+</html>
