@@ -136,9 +136,7 @@ document.getElementById("descargarMapa").onclick = () => {
   const a = document.createElement("a");
 
   a.href = imagen.src;
-  a.download = <img src="a_clean_flat_infographic_style_architectural_cam.png"
-     alt="Mapa del Colegio Salesiano Santa Rosa"
-     style="width: 100%; height: auto;">
+  a.download = "Hostold-Colegio-Salesiano-Santa-Rosa.png";
 
   document.body.appendChild(a);
   a.click();
