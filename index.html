@@ -1,197 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Hostold - Mapas de Accesibilidad</title>
+<title>HOSTOLD | Mapas de Accesibilidad</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: white;
-        }
-
-        header {
-            background: #0f172a;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #334155;
-        }
-
-        .logo {
-            font-size: 30px;
-            font-weight: bold;
-            color: #38bdf8;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: #38bdf8;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 50px 20px 30px;
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            color: #cbd5e1;
-            font-size: 18px;
-        }
-
-        .mapas {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-
-        .mapa {
-            background: #1e293b;
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .mapa h2 {
-            color: #38bdf8;
-            margin-bottom: 20px;
-        }
-
-        .mapa img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 12px;
-        }
-
-        .botones {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            background: #38bdf8;
-            color: #0f172a;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #22c55e;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #0f172a;
-            color: #94a3b8;
-            margin-top: 40px;
-        }
-
-        @media (max-width: 700px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-        }
-    </style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <div class="logo">HOSTOLD</div>
+<header>
+    <h1>HOSTOLD</h1>
+    <p>Mapas de Accesibilidad ♿</p>
+</header>
 
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#mapas">Mapas</a>
-            <a href="#accesibilidad">Accesibilidad</a>
-        </nav>
-    </header>
 
-    <section class="hero" id="inicio">
-        <h1>Mapas de accesibilidad</h1>
-        <p>
-            Encuentra información sobre accesos y espacios para personas
-            con discapacidad.
+<main>
+
+    <!-- PANEL DE BÚSQUEDA -->
+    <aside class="panel">
+
+        <h2>Buscar ubicación</h2>
+
+        <label for="region">Región</label>
+        <select id="region">
+            <option value="">Seleccione...</option>
+        </select>
+
+
+        <label for="provincia">Provincia</label>
+        <select id="provincia" disabled>
+            <option value="">Seleccione...</option>
+        </select>
+
+
+        <label for="distrito">Distrito</label>
+        <select id="distrito" disabled>
+            <option value="">Seleccione...</option>
+        </select>
+
+
+        <label for="lugar">Lugar</label>
+        <select id="lugar" disabled>
+            <option value="">Seleccione...</option>
+        </select>
+
+
+        <button id="guardar" disabled>
+            Guardar ubicación
+        </button>
+
+        <p id="mensaje">
+            Seleccione una ubicación.
         </p>
-    </section>
 
-    <main class="mapas" id="mapas">
+    </aside>
 
-        <section class="mapa">
-            <h2>📍 Colegio Salesiano Santa Rosa</h2>
+
+    <!-- MAPA -->
+    <section>
+
+        <h2>Mapas disponibles</h2>
+
+        <div class="card">
 
             <img
-                src="a_clean_flat_infographic_style_architectural_cam.png"
-                alt="Mapa del Colegio Salesiano Santa Rosa">
+                id="imagenMapa"
+                src="assets/no-map.svg"
+                alt="Mapa de accesibilidad"
+            >
 
-            <div class="botones">
-                <button onclick="descargarMapa()">
-                    Descargar mapa
+            <div>
+
+                <button id="verMapa">
+                    🔎 Ver mapa completo
                 </button>
+
+                <button id="descargarMapa">
+                    📥 Descargar
+                </button>
+
             </div>
-        </section>
 
-    </main>
+        </div>
 
-    <section class="hero" id="accesibilidad">
-        <h2>♿ Accesibilidad para todos</h2>
-        <p>
-            Este proyecto busca facilitar la ubicación de espacios
-            accesibles y ayudar a mejorar la movilidad.
-        </p>
+
+        <!-- LEYENDA -->
+        <div class="legend">
+
+            <h3>Leyenda</h3>
+
+            <p>♿ Rampa</p>
+            <p>🚻 Baño accesible</p>
+            <p>🛗 Ascensor</p>
+            <p>🅿 Estacionamiento reservado</p>
+            <p>🚪 Entrada accesible</p>
+            <p>⚠ Escaleras</p>
+
+        </div>
+
     </section>
 
-    <footer>
-        <p>HOSTOLD © 2026</p>
-        <p>Mapas de accesibilidad</p>
-    </footer>
+</main>
 
-    <script>
-        function descargarMapa() {
-            const enlace = document.createElement("a");
 
-            enlace.href =
-                "a_clean_flat_infographic_style_architectural_cam.png";
+<!-- VISOR DEL MAPA -->
+<div id="visorMapa">
 
-            enlace.download =
-                "Mapa-Colegio-Salesiano-Santa-Rosa.png";
+    <button id="cerrarMapa">
+        ✕
+    </button>
 
-            enlace.click();
-        }
-    </script>
+    <img
+        id="mapaGrande"
+        src=""
+        alt="Mapa completo"
+    >
+
+</div>
+
+
+<footer>
+    HOSTOLD © 2026
+</footer>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
