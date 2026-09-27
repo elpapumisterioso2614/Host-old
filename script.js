@@ -156,16 +156,8 @@ lugar.onchange = () => {
         lugar.value ===
         "Colegio Salesiano Santa Rosa"
     ) {
-
-        /*
-        IMPORTANTE:
-        El mapa está en la raíz del repositorio.
-        El nombre debe ser EXACTAMENTE:
-        salesiano-mapa(2).png
-        */
-
         imagen.src =
-            "salesiano-mapa(2).png";
+            "Gemini_Generated_Image_n2uqnfn2uqnfn2uq.jpeg";
 
 
         mensaje.textContent =
