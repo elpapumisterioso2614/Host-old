@@ -1,41 +1,75 @@
+// ==========================================
+// DATOS DE HOSTOLD
+// ==========================================
+
 const datos = {
+
     "Junín": {
+
         "Huancayo": {
+
             "Huancayo": [
+
                 "Colegio Salesiano Santa Rosa"
+
             ]
+
         }
+
     }
+
 };
 
 
-const region = document.getElementById("region");
-const provincia = document.getElementById("provincia");
-const distrito = document.getElementById("distrito");
-const lugar = document.getElementById("lugar");
 
-const guardar = document.getElementById("guardar");
-const mensaje = document.getElementById("mensaje");
+// ==========================================
+// CONECTAR HTML CON JAVASCRIPT
+// ==========================================
 
-const imagen = document.getElementById("imagenMapa");
+const region =
+    document.getElementById("region");
+
+const provincia =
+    document.getElementById("provincia");
+
+const distrito =
+    document.getElementById("distrito");
+
+const lugar =
+    document.getElementById("lugar");
+
+const guardar =
+    document.getElementById("guardar");
+
+const mensaje =
+    document.getElementById("mensaje");
+
+const imagen =
+    document.getElementById("imagenMapa");
 
 
-// ==========================
+
+// ==========================================
 // REGIÓN
-// ==========================
+// ==========================================
 
 for (const r in datos) {
 
-    const o = document.createElement("option");
+    const opcion =
+        document.createElement("option");
 
-    o.value = r;
-    o.textContent = r;
+    opcion.value = r;
 
-    region.appendChild(o);
+    opcion.textContent = r;
+
+    region.appendChild(opcion);
+
 }
 
 
+
 region.onchange = () => {
+
 
     provincia.innerHTML =
         '<option value="">Seleccione...</option>';
@@ -48,33 +82,43 @@ region.onchange = () => {
 
 
     provincia.disabled = false;
+
     distrito.disabled = true;
+
     lugar.disabled = true;
 
     guardar.disabled = true;
 
 
-    for (const p in datos[region.value]) {
+    for (
+        const p in datos[region.value]
+    ) {
 
-        const o = document.createElement("option");
+        const opcion =
+            document.createElement("option");
 
-        o.value = p;
-        o.textContent = p;
+        opcion.value = p;
 
-        provincia.appendChild(o);
+        opcion.textContent = p;
+
+        provincia.appendChild(opcion);
+
     }
 
 
     mensaje.textContent =
         "Seleccione una provincia.";
+
 };
 
 
-// ==========================
+
+// ==========================================
 // PROVINCIA
-// ==========================
+// ==========================================
 
 provincia.onchange = () => {
+
 
     distrito.innerHTML =
         '<option value="">Seleccione...</option>';
@@ -84,78 +128,105 @@ provincia.onchange = () => {
 
 
     distrito.disabled = false;
+
     lugar.disabled = true;
 
     guardar.disabled = true;
 
 
     for (
-        const d in datos[region.value][provincia.value]
+        const d in
+        datos[region.value][provincia.value]
     ) {
 
-        const o = document.createElement("option");
+        const opcion =
+            document.createElement("option");
 
-        o.value = d;
-        o.textContent = d;
+        opcion.value = d;
 
-        distrito.appendChild(o);
+        opcion.textContent = d;
+
+        distrito.appendChild(opcion);
+
     }
 
 
     mensaje.textContent =
         "Seleccione un distrito.";
+
 };
 
 
-// ==========================
+
+// ==========================================
 // DISTRITO
-// ==========================
+// ==========================================
 
 distrito.onchange = () => {
+
 
     lugar.innerHTML =
         '<option value="">Seleccione...</option>';
 
 
     lugar.disabled = false;
+
     guardar.disabled = true;
 
 
-    datos[
-        region.value
-    ][
-        provincia.value
-    ][
-        distrito.value
-    ].forEach(n => {
+    datos
+        [region.value]
+        [provincia.value]
+        [distrito.value]
+        .forEach(nombre => {
 
-        const o = document.createElement("option");
 
-        o.value = n;
-        o.textContent = n;
+            const opcion =
+                document.createElement("option");
 
-        lugar.appendChild(o);
-    });
+
+            opcion.value =
+                nombre;
+
+
+            opcion.textContent =
+                nombre;
+
+
+            lugar.appendChild(opcion);
+
+        });
 
 
     mensaje.textContent =
         "Seleccione un lugar.";
+
 };
 
 
-// ==========================
+
+// ==========================================
 // LUGAR
-// ==========================
+// ==========================================
 
 lugar.onchange = () => {
 
-    guardar.disabled = !lugar.value;
 
+    guardar.disabled =
+        !lugar.value;
+
+
+
+    // ======================================
+    // MAPA DEL COLEGIO SALESIANO
+    // ======================================
 
     if (
         lugar.value ===
         "Colegio Salesiano Santa Rosa"
     ) {
+
+
         imagen.src =
             "Gemini_Generated_Image_n2uqnfn2uqnfn2uq.jpeg";
 
@@ -163,22 +234,19 @@ lugar.onchange = () => {
         mensaje.textContent =
             "Mapa del Colegio Salesiano Santa Rosa listo.";
 
-    } else {
 
-        imagen.src =
-            "assets/no-map.svg";
-
-        mensaje.textContent =
-            "No hay mapas (aún).";
     }
+
 };
 
 
-// ==========================
-// GUARDAR
-// ==========================
+
+// ==========================================
+// GUARDAR UBICACIÓN
+// ==========================================
 
 guardar.onclick = () => {
+
 
     localStorage.setItem(
         "hostold-lugar",
@@ -188,21 +256,28 @@ guardar.onclick = () => {
 
     mensaje.textContent =
         "✔ Ubicación guardada correctamente.";
+
 };
 
 
-// ==========================
+
+// ==========================================
 // VISOR DEL MAPA
-// ==========================
+// ==========================================
 
 const visor =
     document.getElementById("visorMapa");
 
-const grande =
+const mapaGrande =
     document.getElementById("mapaGrande");
 
+const botonVerMapa =
+    document.getElementById("verMapa");
 
-document.getElementById("verMapa").onclick = () => {
+
+
+botonVerMapa.onclick = () => {
+
 
     if (!lugar.value) {
 
@@ -210,55 +285,75 @@ document.getElementById("verMapa").onclick = () => {
             "Primero selecciona un lugar.";
 
         return;
+
     }
 
 
-    grande.src = imagen.src;
-
-    visor.classList.add("activo");
-};
-
-
-// ==========================
-// CERRAR VISOR
-// ==========================
-
-document.getElementById("cerrarMapa").onclick = () => {
-
-    visor.classList.remove("activo");
-};
-
-
-// ==========================
-// DESCARGAR
-// ==========================
-
-document.getElementById("descargarMapa").onclick = () => {
-
-    if (!lugar.value) {
-
-        mensaje.textContent =
-            "Primero selecciona un lugar.";
-
-        return;
-    }
-
-
-    const a =
-        document.createElement("a");
-
-
-    a.href =
+    mapaGrande.src =
         imagen.src;
 
 
-    a.download =
-        "Hostold-Colegio-Salesiano-Santa-Rosa.png";
+    visor.classList.add("activo");
+
+};
 
 
-    document.body.appendChild(a);
 
-    a.click();
+// ==========================================
+// CERRAR MAPA
+// ==========================================
 
-    document.body.removeChild(a);
+const botonCerrar =
+    document.getElementById("cerrarMapa");
+
+
+botonCerrar.onclick = () => {
+
+    visor.classList.remove("activo");
+
+};
+
+
+
+// ==========================================
+// DESCARGAR MAPA
+// ==========================================
+
+const botonDescargar =
+    document.getElementById("descargarMapa");
+
+
+botonDescargar.onclick = () => {
+
+
+    if (!lugar.value) {
+
+        mensaje.textContent =
+            "Primero selecciona un lugar.";
+
+        return;
+
+    }
+
+
+    const enlace =
+        document.createElement("a");
+
+
+    enlace.href =
+        imagen.src;
+
+
+    enlace.download =
+        "Hostold-Colegio-Salesiano-Santa-Rosa.jpeg";
+
+
+    document.body.appendChild(enlace);
+
+
+    enlace.click();
+
+
+    document.body.removeChild(enlace);
+
 };
